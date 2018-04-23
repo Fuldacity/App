@@ -20,6 +20,24 @@ const NewsCardBody = styled(Card.Body)`
   border-top-right-radius: 15px;
   overflow: hidden;
 `
+
+const NewsDate = styled.View`
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background-color: black;
+  opacity: 0.75;
+  padding: 4px;
+  border-radius: 5px;
+
+`
+const NewsDateText = styled.Text`
+font-size: 20px;
+color: white;
+text-align: center;
+`
+
+
 const EventListView = styled(View)`
 
 `
@@ -31,6 +49,7 @@ const NewsImage = styled(Image)`
 const NewsDescription = styled(Text)`
   padding-top: 8px;
 `
+
 
 export default class News extends React.Component {
   constructor(props) {
@@ -70,10 +89,15 @@ export default class News extends React.Component {
           <NewsCard full={true}>
 
             <NewsCardBody>
-
               <NewsImage
                 source={{uri: imgUrl}}
               />
+              <NewsDate>
+                <NewsDateText>
+                 23 {"\n"}
+                 APR
+                </NewsDateText>
+              </NewsDate>
             </NewsCardBody>
             <Card.Footer content={cardContent}
                 />
