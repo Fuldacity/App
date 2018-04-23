@@ -3,23 +3,6 @@ import { View, Text } from 'react-native'
 import News from './news'
 import { NativeRouter, Route, Link } from 'react-router-native'
 import { WhiteSpace } from 'antd-mobile'
-import FBSDK from 'react-native-fbsdk'
-const { GraphRequest, GraphRequestManager } = FBSDK
-
-function _responseInfoCallback(error: ?Object, result: ?Object) {
-  if (error) {
-    console.log("error", error)
-  } else {
-    console.log('success', result);
-  }
-}
-const infoRequest = new GraphRequest(
-  '/134624766583574',
-  null,
-  this._responseInfoCallback,
-)
-
-const rManager = new GraphRequestManager()
 
 
 const About = () => (
