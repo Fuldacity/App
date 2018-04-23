@@ -8,20 +8,47 @@ import Moment from 'moment';
 const NewsCard = styled(Card)`
   border-width: 0;
   border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 5px 10px 18px #888888;
+  shadow-opacity: 0.75;
+  shadow-radius: 5;
+  shadow-color: rgb(64,64,64);
+  shadow-offset: 5px 5px;
 `
 const NewsCardBody = styled(Card.Body)`
   border-top-width: 0;
   padding-vertical: 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: hidden;
 `
+
+const NewsDate = styled.View`
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background-color: black;
+  opacity: 0.75;
+  padding: 4px;
+  border-radius: 5px;
+
+`
+const NewsDateText = styled.Text`
+font-size: 15px;
+color: white;
+text-align: center;
+`
+
+
 const EventListView = styled(View)`
-  background-color: rgb(211,211,211);
+
 `
 const NewsImage = styled(Image)`
   width: 100%;
   padding-top: 50%;
 `
+const NewsDescription = styled(Text)`
+  padding-top: 8px;
+`
+
 
 export default class News extends React.Component {
   constructor(props) {
@@ -31,11 +58,12 @@ export default class News extends React.Component {
       events: [{
         title: 'SClub Night',
         imgUrl: 'https://scontent.fmad8-1.fna.fbcdn.net/v/t45.1600-4/cp0/q75/c0.49.1280.670/s480x480/30557633_6135042921613_6912227594888806400_n.jpg?_nc_cat=0&efg=eyJxZV9ncm91cHMiOlsibm9fc2FmZV9pbWFnZV9mb3JfYWRzX2ltYWdlIl19&oh=9405a4447bc24152ad24aa4b56226ded&oe=5B5FE2F0',
-        secondTitle: 'Wir schaffen das'
+        description: 'Wir schaffen das',
+        date: '2018-04-21T14:00:02+0000'
       }, {
         title: 'Kreuz Night',
         imgUrl: 'https://scontent.fmad8-1.fna.fbcdn.net/v/t45.1600-4/cp0/q90/c49.0.631.330/s480x480/30524655_23842770911420114_145742607018885120_n.png.jpg?_nc_cat=0&efg=eyJxZV9ncm91cHMiOlsibm9fc2FmZV9pbWFnZV9mb3JfYWRzX2ltYWdlIl19&oh=b406bb1bfc67b70b408129346e130091&oe=5B68F287',
-        secondTitle: 'Matthias Kübel ist der einzige Kandidat'
+        description: 'Matthias Kübel ist der einzige Kandidat'
       }],
       isLoading: false
     }
@@ -48,23 +76,30 @@ export default class News extends React.Component {
     Moment.locale('en');
     var dt = '2018-04-21T14:00:02+0000';
 
-      const { title, imgUrl, secondTitle } = event
+      const { title, imgUrl, description } = event
+
+      const cardContent = (
+        <NewsDescription>
+          {description}
+          </NewsDescription>
+        )
+
       return (
         <EventListView key={title}>
           <NewsCard full={true}>
-            <NewsCardBody>
 
+            <NewsCardBody>
               <NewsImage
                 source={{uri: imgUrl}}
               />
+              <NewsDate>
+                <NewsDateText>
+                 23 {"\n"}
+                 APR
+                </NewsDateText>
+              </NewsDate>
             </NewsCardBody>
-            <Card.Footer content={<Text>
-              <WingBlank size="0">
-                <WhiteSpace size="md" />
-                <WhiteSpace size="md" />
-                </WingBlank>
-                secondTitle
-                </Text>}
+            <Card.Footer content={cardContent}
                 />
           </NewsCard>
           //<View> {Moment(dt).format('d MMM')} hallo </View>
