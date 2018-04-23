@@ -8,6 +8,8 @@ import Moment from 'moment';
 const NewsCard = styled(Card)`
   border-width: 0;
   border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 5px 10px 18px #888888;
 `
 const NewsCardBody = styled(Card.Body)`
   border-top-width: 0;
@@ -47,20 +49,25 @@ export default class News extends React.Component {
     var dt = '2018-04-21T14:00:02+0000';
 
       const { title, imgUrl, secondTitle } = event
-      console.log(imgUrl)
       return (
         <EventListView key={title}>
           <NewsCard full={true}>
             <NewsCardBody>
 
               <NewsImage
-                style={{borderTopRightRadius: '25px'}}
                 source={{uri: imgUrl}}
               />
             </NewsCardBody>
-            <Card.Footer content={secondTitle} extra={<Text>extra footer content</Text>} />
+            <Card.Footer content={<Text>
+              <WingBlank size="0">
+                <WhiteSpace size="md" />
+                <WhiteSpace size="md" />
+                </WingBlank>
+                secondTitle
+                </Text>}
+                />
           </NewsCard>
-          <View> {Moment(dt).format('d MMM')} hallo </View>
+          //<View> {Moment(dt).format('d MMM')} hallo </View>
 
           <WhiteSpace size="lg" />
         </EventListView>
@@ -72,10 +79,7 @@ export default class News extends React.Component {
     const { events, isLoading } = this.state;
     return (
         <EventListView>
-          <WingBlank size="lg">
-            <WhiteSpace size="lg" />
-            <WhiteSpace size="lg" />
-            <WhiteSpace size="lg" />
+          <WingBlank size="md">
             <WhiteSpace size="lg" />
             {this.renderEventList()}
           </WingBlank>
