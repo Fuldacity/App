@@ -1,5 +1,15 @@
 {
   "expo": {
-    "sdkVersion": "26.0.0"
+      "name": "FuldaCity",
+      "icon": "./icon.png",
+      "version": "1.0.0",
+      "slug": "FuldaCity",
+      "sdkVersion": "26.0.0",
+      "ios": {
+          "bundleIdentifier": "com.fuldacity.app"
+      },
+      "android": {
+          "package": "com.fuldacity.app"
+      }
   }
 }

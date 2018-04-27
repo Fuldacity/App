@@ -1,26 +1,25 @@
-import React from 'react'
-import News from './news'
-import Events from './events.js'
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { TabNavigator, TabBarBottom } from 'react-navigation'
+import React, { Component, Fragment } from 'react'
+import TabNavigator from './tabBar'
+import AppHeader from './containers/appHeader'
+// Redux
+import { createStore, applyMiddleware } from 'redux'
+import logger from 'redux-logger'
+import { Provider } from 'react-redux'
+import reducers from './reducers/index'
+const store = createStore(
+  reducers,
+  applyMiddleware(logger)
+)
 
-export default TabNavigator({
-  News: { screen: News },
-  Events: { screen: Events }
-}, {
-  navigationOptions: ({ navigation }) => ({
-    tabBarIcon: ({ focused, tintColor }) => {
-      const { routeName } = navigation.state;
-      let iconName;
-      if (routeName === 'Events') {
-        iconName = `ios-musical-notes${focused ? '' : '-outline'}`;
-      } else if (routeName === 'News') {
-        iconName = `ios-paper${focused ? '' : '-outline'}`;
-      }
-
-      // You can return any component that you like here! We usually use an
-      // icon component from react-native-vector-icons
-      return <Ionicons name={iconName} size={25} color={tintColor} />;
-    },
-  }),
-})
+export default class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <Fragment>
+          <AppHeader />
+          <TabNavigator />
+        </Fragment>
+      </Provider>
+    )
+  }
+}
